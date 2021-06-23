@@ -1,3 +1,70 @@
+[tool.poetry]
+name = "marshmallow_dataclass"
+version = "8.4.1"
+description = "Python library to convert dataclasses into marshmallow schemas."
+authors = ["Ophir LOJKINE <pere.jobs@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/lovasoa/marshmallow_dataclass"
+documentation = "https://marshmallow.readthedocs.io"
+keywords = ["marshmallow", "dataclass", "serialization"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content :: CGI Tools/Libraries"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.6.1"
+dataclasses = {version = "*", python = "~3.6"}
+marshmallow = "^3.0.0"
+marshmallow-enum = {version = "*", optional = true}
+typeguard = {version = "*", optional = true}
+types-dataclasses = {version = "*", python = "~3.6"}
+typing-inspect = ">=0.7.0"
+
+[tool.poetry.extras]
+enum = ["marshmallow-enum"]
+union = ["typeguard"]
+
+[tool.poetry.dev-dependencies]
+# TESTS
+pytest = ">=5.6"
+# re: pypy: typed-ast (a dependency of mypy) fails to install on pypy
+# https://github.com/python/typed_ast/issues/111
+pytest-mypy-plugins = {version = ">=1.2.0", markers = "implementation_name != 'pypy'"}
+# `Literal` was introduced in:
+# - Python 3.8 (https://www.python.org/dev/peps/pep-0586)
+# - typing-extensions 3.7.2 (https://github.com/python/typing/pull/591)
+typing-extensions = {version = "^3.7.2", python = "<3.8"}
+
+# DOCS
+sphinx = "*"
+
+# LINT
+# re: pypy: typed-ast (a dependency of black) fails to install on pypy
+# https://github.com/python/typed_ast/issues/111
+black = {version = "20.8b1", markers = "implementation_name != 'pypy'"}
+blacken-docs = "^1.9.1"
+flake8 = "^3.8.4"
+flake8-bugbear = "^19.8.0"
+# re: pypy: typed-ast (a dependency of mypy) fails to install on pypy
+# https://github.com/python/typed_ast/issues/111
+mypy = {version = "0.902", markers = "implementation_name != 'pypy'"}
+pre-commit = "^1.18"
+pyupgrade = "^2.7.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.black]
 line-length = 88
 target-version = ['py36', 'py37', 'py38']
